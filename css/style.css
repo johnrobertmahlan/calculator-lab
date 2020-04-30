@@ -1,0 +1,29 @@
+/* Simple Reset */
+
+* {
+    box-sizing: border-box; /* keeps everything the same size no matter what*/
+    margin: 0; /* this guarantees that all our elements will be up against each other; nothing between them*/
+}
+
+main {
+    text-align: center;
+}
+
+#buttongrid {
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px auto;
+}
+
+.circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 75px;
+    font-weight: 700;
+}
