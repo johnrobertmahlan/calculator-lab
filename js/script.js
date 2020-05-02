@@ -4,11 +4,13 @@
 
 const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+const operations = ['+', '-', '*', '/'];
+
 
 
 /*----- app's state (variables) -----*/
 
-let value, sum, operator, operation;
+let value, sum, product, operator, operation, firstNum, secondNum;
 
 let inputs = [];
 
@@ -36,7 +38,8 @@ calculateEl.addEventListener('click', render);
 
 /*----- functions -----*/
 
-function handleClick(evt) {
+
+ function handleClick(evt) {
     //First, determine whether the textContent of the clicked button is a number or not
     value = evt.target.textContent;
     parsedValue = parseInt(value);
@@ -48,6 +51,9 @@ function handleClick(evt) {
         if(operator === '+') {
             console.log(operator);
             operation = 'addition';
+        } else if(operator === '*') {
+            console.log(operator);
+            operation = 'multiplication';
         }
      }
     
@@ -67,5 +73,11 @@ function render() {
             sum += inputs[i];
             displayEl.innerHTML = sum;
         }   return sum;
+    } else if(operation === 'multiplication') {
+        product = 1;
+        for(let i=0; i<inputs.length; i++) {
+            product *= inputs[i];
+            displayEl.innerHTML = product;
+        } return product;
     }
-}
+} 
