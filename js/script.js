@@ -10,7 +10,7 @@ const operations = ['+', '-', '*', '/'];
 
 /*----- app's state (variables) -----*/
 
-let value, sum, product, operator, operation, firstNum, secondNum;
+let value, sum, product, difference, quotient, operator, operation, firstNum, secondNum;
 
 let inputs = [];
 
@@ -54,6 +54,12 @@ calculateEl.addEventListener('click', render);
         } else if(operator === '*') {
             console.log(operator);
             operation = 'multiplication';
+        } else if(operator === '-') {
+            console.log(operator);
+            operation = 'subtraction';
+        } else {
+            console.log(operator);
+            operation = 'division';
         }
      }
     
@@ -79,5 +85,15 @@ function render() {
             product *= inputs[i];
             displayEl.innerHTML = product;
         } return product;
-    }
-} 
+    } else if(operation === 'subtraction') {
+        difference = inputs.reduce(function(firstNum, secondNum) {
+            return firstNum - secondNum;
+        });
+        displayEl.innerHTML = difference;
+    } else {
+        quotient = inputs.reduce(function(num1, num2) {
+            return num1 / num2;
+        });
+        displayEl.innerHTML = quotient;
+    };
+};
