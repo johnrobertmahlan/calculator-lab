@@ -1,29 +1,9 @@
-//MODEL
-
-/*----- constants -----*/
-
-const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-const operations = ['+', '-', '*', '/'];
-
-
-
-/*----- app's state (variables) -----*/
-
-let value, sum, product, difference, quotient, operation, firstNum, secondNum;
+let value, sum, product, difference, quotient, operator, operation, displayValue;
 
 let inputs = [];
 
-let displayValue;
-
-let operator = null;
 
 
-
-
-//CONTROLLER
-
-/*----- cached element references -----*/
 
 const buttongridEl = document.getElementById('buttongrid')
 
@@ -33,62 +13,52 @@ const calculateEl = document.getElementById('calculate')
 
 
 
-/*----- event listeners -----*/
 
 buttongridEl.addEventListener('click', handleClick);
 
 calculateEl.addEventListener('click', render);
 
 
-
-/*----- functions -----*/
-
-
- function handleClick(evt) {
+//This function runs when any button *except* the '=' button is clicked
+function handleClick(evt) {
     //First, determine whether the textContent of the clicked button is a number or not
     value = evt.target.textContent;
     parsedValue = parseInt(value);
 
-    //IF textContent is NOT a number, then we need to pair that content with a mathematical operation
+    //Second, if textContent is *not* a number, then we need to pair that content with a mathematical operation
     if(isNaN(parsedValue)) {
         operator = evt.target.textContent;
-        displayNumber = parseInt(displayEl.innerHTML);
+        displayNumber = parseInt(displayValue);
         if(operator === '+') {
             displayEl.innerHTML = '';
-            console.log(operator);
             operation = 'addition';
-            inputs.push(displayNumber);
+            inputs.push(displayNumber); // push the current number on display to an array for availablility for operations
         } else if(operator === '*') {
             displayEl.innerHTML = '';
-            console.log(operator);
             operation = 'multiplication';
-            inputs.push(displayNumber);
+            inputs.push(displayNumber); // push the current number on display to an array for availablility for operations
         } else if(operator === '-') {
             displayEl.innerHTML = '';
-            console.log(operator);
             operation = 'subtraction';
-            inputs.push(displayNumber);
+            inputs.push(displayNumber); // push the current number on display to an array for availablility for operations
         } else if(operator === '/') {
             displayEl.innerHTML = '';
-            console.log(operator);
             operation = 'division';
-            inputs.push(displayNumber);
+            inputs.push(displayNumber); // push the current number on display to an array for availablility for operations
         }
      }
     
-    //IF textContent IS a number, then we need to store and display that number
+    //Third, if textContent *is* a number, then we need to store and display that number
      else {
-        displayEl.innerHTML = displayEl.innerHTML + parsedValue;
+        displayEl.innerHTML = displayEl.innerHTML + parsedValue; // this line allows for multidigit numbers by letting the user append whatever number they just clicked to the numbers previously clicked
         displayValue = displayEl.innerHTML;
-        //displayEl.innerHTML = parsedValue;
-        //inputs.push(parsedValue);
-        //console.log(inputs);
         }
      return inputs;
 }   
 
+//This function runs when the '=' button is clicked
 function render() {
-    inputs.push(parseInt(displayEl.innerHTML));
+    inputs.push(parseInt(displayValue)); // the handleClick function does not allow us to push the second number a user enters into the inputs array, so that must be done by the render function
 
     if(operation === 'addition') {
         sum = 0;
@@ -117,6 +87,5 @@ function render() {
         displayValue = quotient;
         displayEl.innerHTML = displayValue;
     };
-    inputs = [];
-    //inputs.push(displayValue);
+    inputs = []; // this line clears the inputs array so that additional operations can be performed on displayValue (which will be pushed back into the array if a new operator is pushed by the handleClick function)
 };
