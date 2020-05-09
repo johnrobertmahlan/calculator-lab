@@ -1,9 +1,11 @@
+/* VARIABLES */
+
 let value, sum, product, difference, quotient, operator, operation, displayValue;
 
 let inputs = [];
 
 
-
+/* CACHED ELEMENTS */
 
 const buttongridEl = document.getElementById('buttongrid')
 
@@ -12,12 +14,14 @@ const displayEl = document.getElementById('display')
 const calculateEl = document.getElementById('calculate')
 
 
-
+/* EVENT LISTENERS */
 
 buttongridEl.addEventListener('click', handleClick);
 
 calculateEl.addEventListener('click', render);
 
+
+/* FUNCTIONS */
 
 //This function runs when any button *except* the '=' button is clicked
 function handleClick(evt) {
@@ -50,8 +54,9 @@ function handleClick(evt) {
     
     //Third, if textContent *is* a number, then we need to store and display that number
      else {
-        displayEl.innerHTML = displayEl.innerHTML + parsedValue; // this line allows for multidigit numbers by letting the user append whatever number they just clicked to the numbers previously clicked
+        displayEl.innerHTML = displayEl.innerHTML + parsedValue; // this allows for multidigit numbers by letting the user append whatever number they just clicked to the numbers previously clicked
         displayValue = displayEl.innerHTML;
+        //if an operator is clicked, I then want to store displayValue and display it; we already have that 'if' condition above, at line 33, so the relevant code is included there
         }
      return inputs;
 }   
@@ -87,5 +92,5 @@ function render() {
         displayValue = quotient;
         displayEl.innerHTML = displayValue;
     };
-    inputs = []; // this line clears the inputs array so that additional operations can be performed on displayValue (which will be pushed back into the array if a new operator is pushed by the handleClick function)
+    inputs = []; // this clears the inputs array so that additional operations can be performed on displayValue (which will be pushed back into the array if a new operator is pushed by the handleClick function)
 };
