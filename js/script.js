@@ -10,9 +10,14 @@ const operations = ['+', '-', '*', '/'];
 
 /*----- app's state (variables) -----*/
 
-let value, sum, product, difference, quotient, operator, operation, firstNum, secondNum;
+let value, sum, product, difference, quotient, operation, firstNum, secondNum;
 
 let inputs = [];
+
+let displayValue;
+
+let operator = null;
+
 
 
 
@@ -46,54 +51,72 @@ calculateEl.addEventListener('click', render);
 
     //IF textContent is NOT a number, then we need to pair that content with a mathematical operation
     if(isNaN(parsedValue)) {
-        //somehow, we will have to call the appropriate function based on the operation symbol clicked
         operator = evt.target.textContent;
+        displayNumber = parseInt(displayEl.innerHTML);
         if(operator === '+') {
+            displayEl.innerHTML = '';
             console.log(operator);
             operation = 'addition';
+            inputs.push(displayNumber);
         } else if(operator === '*') {
+            displayEl.innerHTML = '';
             console.log(operator);
             operation = 'multiplication';
+            inputs.push(displayNumber);
         } else if(operator === '-') {
+            displayEl.innerHTML = '';
             console.log(operator);
             operation = 'subtraction';
-        } else {
+            inputs.push(displayNumber);
+        } else if(operator === '/') {
+            displayEl.innerHTML = '';
             console.log(operator);
             operation = 'division';
+            inputs.push(displayNumber);
         }
      }
     
     //IF textContent IS a number, then we need to store and display that number
      else {
-        displayEl.innerHTML = parsedValue;
-        inputs.push(parsedValue);
-        console.log(inputs);
-    } return inputs;
+        displayEl.innerHTML = displayEl.innerHTML + parsedValue;
+        displayValue = displayEl.innerHTML;
+        //displayEl.innerHTML = parsedValue;
+        //inputs.push(parsedValue);
+        //console.log(inputs);
+        }
+     return inputs;
 }   
 
 function render() {
-    //console.log(operation);
+    inputs.push(parseInt(displayEl.innerHTML));
+
     if(operation === 'addition') {
         sum = 0;
         for(let i=0; i<inputs.length; i++) {
             sum += inputs[i];
-            displayEl.innerHTML = sum;
-        }   return sum;
+            displayValue = sum;
+            displayEl.innerHTML = displayValue;
+        };
     } else if(operation === 'multiplication') {
         product = 1;
         for(let i=0; i<inputs.length; i++) {
             product *= inputs[i];
-            displayEl.innerHTML = product;
-        } return product;
+            displayValue = product;
+            displayEl.innerHTML = displayValue;
+        };
     } else if(operation === 'subtraction') {
         difference = inputs.reduce(function(firstNum, secondNum) {
             return firstNum - secondNum;
         });
-        displayEl.innerHTML = difference;
+        displayValue = difference;
+        displayEl.innerHTML = displayValue;
     } else {
         quotient = inputs.reduce(function(num1, num2) {
             return num1 / num2;
         });
-        displayEl.innerHTML = quotient;
+        displayValue = quotient;
+        displayEl.innerHTML = displayValue;
     };
+    inputs = [];
+    //inputs.push(displayValue);
 };
