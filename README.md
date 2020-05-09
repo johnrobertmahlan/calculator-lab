@@ -4,7 +4,7 @@ Herewith some closing thoughts on this calculator app, which I will not work on 
 
 Suppose you enter the following: `5 + 5 - 2` and then hit the equal sign. You'd expect the result to be `8`, but instead the calculator returns `-2`. 
 
-The reason is the way the render function was built into the equal sign. When you hit `5+5`, the following evaluates to true: `operation === 'addition'`. But if you do not hit the equal sign at this point, and simply move on to enter `-2`, then `operation === 'addition'` no longer evaluates to true; instead, `operation === 'subtraction'` evaluates to true. When you then hit the equal sign, there are three elements in our array:
+The reason is the way the render function was built into the equal sign. When you hit `5 + 5`, the following evaluates to true: `operation === 'addition'`. But if you do not hit the equal sign at this point, and simply move on to enter `- 2`, then `operation === 'addition'` no longer evaluates to true; instead, `operation === 'subtraction'` evaluates to true. When you then hit the equal sign, there are three elements in our array:
 
 `inputs = [5, 5, 2]`
 
